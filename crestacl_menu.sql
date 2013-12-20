@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2013 at 10:02 AM
+-- Generation Time: Dec 20, 2013 at 10:06 AM
 -- Server version: 5.1.70-cll
 -- PHP Version: 5.3.17
 
@@ -35,6 +35,31 @@ CREATE TABLE IF NOT EXISTS `Menu` (
   PRIMARY KEY (`longitud`,`latitud`,`Producto`),
   KEY `latitud` (`latitud`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Restorant`
+--
+
+CREATE TABLE IF NOT EXISTS `Restorant` (
+  `longitud` varchar(20) NOT NULL,
+  `latitud` varchar(20) NOT NULL,
+  `Happy Hour` int(11) NOT NULL,
+  `Domicilio` int(11) NOT NULL,
+  `Comida Rapida` int(11) NOT NULL,
+  `Nombre` varchar(40) NOT NULL,
+  `Telefono` int(11) NOT NULL,
+  `Direccion` varchar(40) NOT NULL,
+  PRIMARY KEY (`longitud`,`latitud`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Restorant`
+--
+
+INSERT INTO `Restorant` (`longitud`, `latitud`, `Happy Hour`, `Domicilio`, `Comida Rapida`, `Nombre`, `Telefono`, `Direccion`) VALUES
+('2342o34', 'i12i3u12', 0, 1, 0, '', 0, '');
 
 --
 -- Constraints for dumped tables
