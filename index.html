@@ -61,6 +61,18 @@
     }
 
 		});
+    function coordenadasCiudad(data){
+        var ciudad = JSON.stringify(data);
+ 
+        // Realizamos la petición al servidor
+        $.post('getCoorCiudad.php', {ciudad: ciudad},
+        function(respuesta) {
+            console.log(respuesta);
+        }).error(
+               function(){
+               console.log('Error al ejecutar la petición');   
+        });
+    }
 	</script>
 
 </head>
