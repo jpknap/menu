@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script type="text/javascript" src="jquery.gomap-1.3.2.min.js"></script>
+<style>
+#map {
+	width:700px;
+	height: 400px;
+
+}
+</style>
+	<script>
+
+		$(document).ready(function(){
+			initialize();
+			$.getJSON('map21102013.php','',process_contatcs);
+			var array =  new Array();
+			function process_contatcs(data){
+
+
+				$.each(data, function(name , info){
+					TestMarker(info.latitude , info.longitude , info.title , info.id);
+
+
+				});
+
+				}
+
+    // Standard google maps function
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(-39.833372, -73.245341);
+        var myOptions = {
+            zoom: 17,
+            center: myLatlng
+        }
+        map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    }
+
+    // Function for adding a marker to the page.
+    function addMarker(location,title,id) {
+        marker = new google.maps.Marker({
+            position: location,
+            title: title,
+            id: id,
+            map: map
+        });
+    }
+
+    // Testing the addMarker function
+    function TestMarker(lat ,longi , title ,id ) {
+           marke = new google.maps.LatLng(lat, longi);
+           addMarker(marke,title,id);
+    }
+
+		});
+	</script>
+
+</head>
+<body>
+
+	<div id="map" >
+	</div>
+
+</body>
+
+</html>
+
