@@ -47,12 +47,14 @@
 
     // Function for adding a marker to the page.
     function addMarker(location,title,id) {
+        
         marker = new google.maps.Marker({
             position: location,
             title: title,
             id: id,
             map: map
         });
+
     }
 
     // Testing the addMarker function
