@@ -4,10 +4,11 @@
 	include "../../conexion.php";	
 	mysql_query('SET CHARACTER SET utf8'); //obliga a los datos traidos de mysql que sean en utf 8
 
-	$ciudad=json_decode($_POST['ciudad']);
-	$consulta= "SELECT latitud, longitud  from Ciudad where nombre='$ciudad'";
+	$ciudad=$_POST['ciudad'];
 
-	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());;
+	$consulta= "SELECT latitud, longitud  from ciudad where nombre='$ciudad'";
+
+	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());
 	//$datos = mysql_fetch_array($query) 
 	$data = array();
 		// fetch assoc, nombre asociativo de a columna con la data
