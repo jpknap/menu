@@ -68,9 +68,6 @@ INSERT INTO `Restorant` (`longitud`, `latitud`, `Happy Hour`, `Domicilio`, `Comi
 --
 -- Constraints for table `Menu`
 --
-ALTER TABLE `Menu`
-  ADD CONSTRAINT `Menu_ibfk_1` FOREIGN KEY (`longitud`) REFERENCES `Menu` (`longitud`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Menu_ibfk_2` FOREIGN KEY (`latitud`) REFERENCES `Menu` (`longitud`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

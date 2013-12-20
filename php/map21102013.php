@@ -1,10 +1,11 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set('display_error','1'); //notifica todos los errores de php
-	include "php/conexion.php";	
+	include "conexion.php";	
 	mysql_query('SET CHARACTER SET utf8'); //obliga a los datos traidos de mysql que sean en utf 8
 
-	$consulta= "SELECT * from maps";
+	$consulta= "SELECT latitud, longitud , nombre from restorant where 1";
+
 	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());;
 	//$datos = mysql_fetch_array($query) 
 	$data = array();

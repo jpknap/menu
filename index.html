@@ -22,7 +22,12 @@
 
 
 				$.each(data, function(name , info){
-					TestMarker(info.latitude , info.longitude , info.title , info.id);
+                    var lat = info.latitud ;
+                    var lon = info.longitud;
+                    var title = info.nombre;
+                    var id = title;
+
+					TestMarker(lat , lon , title , id);
 
 
 				});
