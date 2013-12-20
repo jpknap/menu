@@ -28,10 +28,12 @@
                     var id = nombre;
 					TestMarker(lat, lon , nombre , id);
 
+             
+		      });
+         }
+    });
 
-				});
-
-				}
+				
 
     // Standard google maps function
     function initialize() {
@@ -45,6 +47,7 @@
     }
 
     // Function for adding a marker to the page.
+    var gmarkers = [];
     function addMarker(location,title,id) {
         marker = new google.maps.Marker({
             position: location,
@@ -52,6 +55,7 @@
             id: id,
             map: map
         });
+        gmarkers.push(marker);
     }
 
     // Testing the addMarker function
@@ -60,7 +64,7 @@
            addMarker(marke,title,id);
     }
 
-		});
+	
     function coordenadasCiudad(){
         //var data=document.getElementById("buscaCiudad");
        var data = $("#buscaCiudad").val();
@@ -78,6 +82,16 @@
                function(){
                console.log('Error al ejecutar la petición');   
         });
+
+    }
+    function puntos_rest(item){
+      
+        for (i = 0; i<gmarkers.length; i++){
+            gmarkers[i].setMap(null);
+        }
+        var res = $(item).val().split(",");         
+         TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text() );
+
     }
 	</script>
 
@@ -86,6 +100,10 @@
         <div class="form-group">
             <label for="buscaCiudad">Ciudad</label>
             <input type="Ciudad" class="form-control" id="buscaCiudad" placeholder="Ingrese la ciudad que desee revisar">
+            <select id="rest" onchange="puntos_rest(this)"> 
+                 <option value="-38.833372,-39.833372"  >Rest1</option>
+                 <option value="-38.933372,-39.83337" >Rest2</option> 
+            </select>   
         </div>
     </form>
     <button id="buscador" type="submit" class="btn btn-default" onclick= "coordenadasCiudad();">Buscar</button>
