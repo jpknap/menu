@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="jquery-2.0.3.js"></script>
-<script type="text/javascript" src="jquery.gomap-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="js/jquery.gomap-1.3.2.min.js"></script>
 <style>
 #map {
 	width:700px;
@@ -16,7 +16,7 @@
 
 		$(document).ready(function(){
 			initialize();
-			$.getJSON('map21102013.php','',process_contatcs);
+			$.getJSON('php/map21102013.php','',process_contatcs);
 			var array =  new Array();
 			function process_contatcs(data){
 
