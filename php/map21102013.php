@@ -1,7 +1,7 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set('display_error','1'); //notifica todos los errores de php
-	include "conexion.php";	
+	include "../../conexion.php";	
 	mysql_query('SET CHARACTER SET utf8'); //obliga a los datos traidos de mysql que sean en utf 8
 
 	$consulta= "SELECT latitud, longitud , nombre from restorant where 1";
