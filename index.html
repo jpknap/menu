@@ -5,6 +5,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/jquery-2.0.3.js"></script>
 <script type="text/javascript" src="js/jquery.gomap-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/map_funciones.js"></script>
 <style>
 #map {
     width:700px;
@@ -13,58 +14,6 @@
 }
 </style>
 	<script>
-
-		$(document).ready(function(){
-			initialize();
-			$.getJSON('php/map21102013.php','',process_contatcs);
-			var array =  new Array();
-			function process_contatcs(data){
-
-
-				$.each(data, function(name , info){
-                    var lat = info.latitud;
-                    var lon = info.longitud;
-                    var nombre = info.nombre;
-                    var id = nombre;
-					TestMarker(lat, lon , nombre , id);
-
-             
-		      });
-         }
-    });
-
-				
-
-    // Standard google maps function
-    function initialize() {
-        var myLatlng = new google.maps.LatLng(-39.833372, -73.245341);
-        var myOptions = {
-            zoom: 11,
-            center: myLatlng
-        }
-        map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-    }
-
-    // Function for adding a marker to the page.
-    var gmarkers = [];
-    function addMarker(location,title,id) {
-        marker = new google.maps.Marker({
-            position: location,
-            title: title,
-            id: id,
-            map: map
-        });
-        gmarkers.push(marker);
-    }
-
-    // Testing the addMarker function
-    function TestMarker(lat ,longi , title ,id ) {
-           marke = new google.maps.LatLng(lat, longi);
-           addMarker(marke,title,id);
-    }
-
-	
     function coordenadasCiudad(){
         //var data=document.getElementById("buscaCiudad");
        var data = $("#buscaCiudad").val();
@@ -73,26 +22,41 @@
         //console.log(ciudadJSON);
  
         // Realizamos la petición al servidor
-        $.post('php/getCoorCiudad.php', {ciudad:data},
-        function(respuesta) {
-            console.log(respuesta);
+        $.post('php/getCoorCiudad.php', {ciudad:data}, centrarMapa
+            //console.log(respuesta);
+            //alert(respuesta.longitud);
+            //map.panTo(new google.maps.LatLng(respuesta.latitud, respuesta.longitud));
+
             //aqui hacer los cambios en interfaz
 
-        }).error(
+      ).error(
                function(){
                console.log('Error al ejecutar la petición');   
         });
+        $.getJSON('php/caragar_rest.php', {ciudad:data} ,process_contatcs);
+
+   
 
     }
-    function puntos_rest(item){
-      
-        for (i = 0; i<gmarkers.length; i++){
-            gmarkers[i].setMap(null);
-        }
-        var res = $(item).val().split(",");         
-         TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text() );
+    function process_contatcs(data){
+                var info_html = '<option> </option>';
+                console.log(data);               
+                 $.each(data, function(name , info){
+
+                    info_html += "<option value="+info.latitud+","+info.longitud+">"+info.nombre+"</option>";
+
+                
+               });
+                $('#rest').html(info_html);
+            }
+    function centrarMapa(data){
+        $.each(data, function(name , info){
+          
+            map.panTo(new google.maps.LatLng(info.latitud , info.longitud ));
+        });
 
     }
+
 	</script>
 
 </head>
@@ -101,8 +65,7 @@
             <label for="buscaCiudad">Ciudad</label>
             <input type="Ciudad" class="form-control" id="buscaCiudad" placeholder="Ingrese la ciudad que desee revisar">
             <select id="rest" onchange="puntos_rest(this)"> 
-                 <option value="-38.833372,-39.833372"  >Rest1</option>
-                 <option value="-38.933372,-39.83337" >Rest2</option> 
+          
             </select>   
         </div>
     </form>
