@@ -56,7 +56,19 @@
         }
         var res = $(item).val().split(",");         
          TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text() );
+         centrarMapaRest(res[0],res[1]);
+         getMenuRest(res[0], res[1]);
 
+    }
+    
+    function centrarMapa(data){
+        $.each(data, function(name , info){          
+            map.panTo(new google.maps.LatLng(info.latitud , info.longitud ));
+        });
+    }
+    function centrarMapaRest(latitud , longitud){                      
+            map.panTo(new google.maps.LatLng(latitud , longitud ));
+       
     }
     
     

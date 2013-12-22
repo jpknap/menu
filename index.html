@@ -40,7 +40,7 @@
     }
     function process_contatcs(data){
                 var info_html = '<option> </option>';
-                console.log(data);               
+                              
                  $.each(data, function(name , info){
 
                     info_html += "<option value="+info.latitud+","+info.longitud+">"+info.nombre+"</option>";
@@ -48,14 +48,25 @@
                 
                });
                 $('#rest').html(info_html);
-            }
-    function centrarMapa(data){
-        $.each(data, function(name , info){
-          
-            map.panTo(new google.maps.LatLng(info.latitud , info.longitud ));
-        });
+    }
+    function getMenuRest(latitud, longitud){
+        $.getJSON('php/get_menu_rest.php', { latitud:latitud , longitud:longitud } ,processMenuRest);
 
     }
+    function processMenuRest(data){
+        var info_html = '';
+                              
+         $.each(data, function(name , info){
+            info_html += "<tr>"
+            info_html += "<td>"+info.producto+"</td>"+"<td>"+info.descripcion+"</td>"+"<td>"+info.precio+"</td>";
+            info_html += "</tr>"
+
+        
+       });
+        $('#menu_rest').html(info_html);
+
+    }
+
 
 	</script>
 
@@ -67,6 +78,10 @@
             <select id="rest" onchange="puntos_rest(this)"> 
           
             </select>   
+        </div>
+        <div id="menu">
+            <table id="menu_rest" border="1">
+            </table>
         </div>
     </form>
     <button id="buscador" type="submit" class="btn btn-default" onclick= "coordenadasCiudad();">Buscar</button>
