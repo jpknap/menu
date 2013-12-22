@@ -7,7 +7,7 @@
 	$latitud=$_GET['latitud'];
 	$longitud=$_GET['longitud'];
 
-	$consulta= "SELECT producto , precio , descripcion FROM menu WHERE latitud=$latitud and longitud =$longitud";
+	$consulta= "SELECT producto , precio , descripcion FROM menu WHERE latitud='$latitud' and longitud='$longitud'";
 
 	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());
 	//$datos = mysql_fetch_array($query) 
