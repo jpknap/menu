@@ -1,6 +1,7 @@
 
 
 		$(document).ready(function(){
+
 			initialize();
 			$.getJSON('php/map21102013.php','',process_contatcs);
 			var array =  new Array();
@@ -13,12 +14,12 @@
                     var nombre = info.nombre;
                     var id = nombre;
 					TestMarker(lat, lon , nombre , id);
-             
+
 		      });
          }
     });
 
-				
+
 
     // Standard google maps function
     function initialize() {
@@ -48,27 +49,27 @@
            marke = new google.maps.LatLng(lat, longi);
            addMarker(marke,title,id);
     }
-    
+
     function puntos_rest(item){
-      
+
         for (i = 0; i<gmarkers.length; i++){
             gmarkers[i].setMap(null);
         }
-        var res = $(item).val().split(",");         
+        var res = $(item).val().split(",");
          TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text() );
          centrarMapaRest(res[0],res[1]);
          getMenuRest(res[0], res[1]);
 
     }
-    
+
     function centrarMapa(data){
-        $.each(data, function(name , info){          
+        $.each(data, function(name , info){
             map.panTo(new google.maps.LatLng(info.latitud , info.longitud ));
         });
     }
-    function centrarMapaRest(latitud , longitud){                      
+    function centrarMapaRest(latitud , longitud){
             map.panTo(new google.maps.LatLng(latitud , longitud ));
-       
+
     }
-    
-    
+
+

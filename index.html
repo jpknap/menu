@@ -5,6 +5,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/jquery-2.0.3.js"></script>
 <script type="text/javascript" src="js/jquery.gomap-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/oneSimpleTablePaging-1.0.js"></script>
 <script type="text/javascript" src="js/map_funciones.js"></script>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -16,13 +17,14 @@
 }
 </style>
 	<script>
+
     function coordenadasCiudad(){
         //var data=document.getElementById("buscaCiudad");
        var data = $("#buscaCiudad").val();
 
         //var ciudadJSON = JSON.stringify(data);
         //console.log(ciudadJSON);
- 
+
         // Realizamos la petición al servidor
         $.post('php/getCoorCiudad.php', {ciudad:data}, centrarMapa
             //console.log(respuesta);
@@ -33,21 +35,21 @@
 
       ).error(
                function(){
-               console.log('Error al ejecutar la petición');   
+               console.log('Error al ejecutar la petición');
         });
         $.getJSON('php/caragar_rest.php', {ciudad:data} ,process_contatcs);
 
-   
+
 
     }
     function process_contatcs(data){
                 var info_html = '<option> </option>';
-                              
+
                  $.each(data, function(name , info){
 
                     info_html += "<option value="+info.latitud+","+info.longitud+">"+info.nombre+"</option>";
 
-                
+
                });
                 $('#rest').html(info_html);
     }
@@ -57,15 +59,21 @@
     }
     function processMenuRest(data){
         var info_html = '<thead><th>Producto</th><th>Descripción</th><th>Precio</th></thead>';
-                              
+
          $.each(data, function(name , info){
             info_html += "<tr>"
             info_html += "<td>"+info.producto+"</td>"+"<td>"+info.descripcion+"</td>"+"<td>"+info.precio+"</td>";
             info_html += "</tr>"
 
-        
+
        });
+        $('#tablePagination').remove();
         $('#menu_rest').html(info_html);
+        $('#menu_rest').oneSimpleTablePagination({});
+
+
+
+
 
     }
 
@@ -81,34 +89,38 @@
     </p>
 </nav>
 <div class="container-fluid">
-    <div class="row-fluid">    
+    <div class="row-fluid">
         <div class="col-md-5">
-            <form role="form">
                     <div class="row">
                         <div class="col-md-2">
                     <label for="buscaCiudad">Ciudad</label>
                 </div>
                     <div class="col-md-6">
+            		<form role="form">
                     <input type="Ciudad" class="form-control" id="buscaCiudad" placeholder="Ingrese la ciudad que desee revisar">
+                     </form>
                 </div>
-                <div class="col-md-4">
-                    <select id="rest" class="form-control" onchange="puntos_rest(this)"> 
-                  
-                    </select>   
+ 			<div class="col-md-2">
+            <button id="buscador" type="submit" class="btn btn-primary"onclick= "coordenadasCiudad();">Buscar</button>
+            </div>
+              <br>  <br>
+
+                <div class="col-md-10">
+                	<center>
+                    <select id="rest" class="form-control" onchange="puntos_rest(this)"> </select>
+                    </center>
+
                 </div>
                         </div>
                         <br>
                 <div id="menu">
                     <table id="menu_rest" class="table table-hover">
+
                     </table>
                 </div>
-            </form>
-            <br>
-            <div class="row">
-                <center>
-            <button id="buscador" type="submit" class="btn btn-primary"onclick= "coordenadasCiudad();">Buscar</button> 
-            </center>
-            </div>
+
+
+
         </div>
         <div class="col-md-6">
             <div id="map">
@@ -117,6 +129,7 @@
     </div>
 </div>
 </body>
+
 
 </html>
 
