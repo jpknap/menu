@@ -17,10 +17,15 @@
 }
 </style>
 	<script>
+   
 
     function coordenadasCiudad(){
         //var data=document.getElementById("buscaCiudad");
        var data = $("#buscaCiudad").val();
+       if(data.length ==0){
+        alert("Debe ingresar una ciudad");
+       }
+       else{
 
         //var ciudadJSON = JSON.stringify(data);
         //console.log(ciudadJSON);
@@ -38,6 +43,7 @@
                console.log('Error al ejecutar la petición');
         });
         $.getJSON('php/caragar_rest.php', {ciudad:data} ,process_contatcs);
+    }
 
 
 
@@ -81,6 +87,7 @@
 	</script>
 
 </head>
+
 <body>
 <nav class="navbar navbar-inverse" role="navigation">
     <a class="navbar-brand" href="#">CrestaMenu</a>
@@ -97,7 +104,7 @@
                 </div>
                     <div class="col-md-6">
             		<form role="form">
-                    <input type="Ciudad" class="form-control" id="buscaCiudad" placeholder="Ingrese la ciudad que desee revisar">
+                    <input type="Ciudad" class="form-control" id="buscaCiudad" placeholder="Ingrese la ciudad que desee revisar" onkeydown="if (event.keyCode == 13) document.getElementById('buscador').click()">
                      </form>
                 </div>
  			<div class="col-md-2">
