@@ -39,6 +39,7 @@
             position: location,
             title: title,
             id: id,
+            icon: 'images/pt.png',
             map: map
         });
         gmarkers.push(marker);
