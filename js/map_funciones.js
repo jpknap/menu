@@ -39,7 +39,7 @@
             position: location,
             title: title,
             id: id,
-            icon: 'images/pt.png',
+            icon: 'images/restaurant.png',
             map: map
         });
         gmarkers.push(marker);
