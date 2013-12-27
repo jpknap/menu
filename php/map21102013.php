@@ -4,7 +4,7 @@
 	include "../../conexion.php";	
 	mysql_query('SET CHARACTER SET utf8'); //obliga a los datos traidos de mysql que sean en utf 8
 
-	$consulta= "SELECT latitud, longitud , nombre from restorant where 1";
+	$consulta= "SELECT latitud, longitud , nombre, direccion, telefono  from restorant where 1";
 
 	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());;
 	//$datos = mysql_fetch_array($query) 

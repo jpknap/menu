@@ -1,21 +1,23 @@
 
 
-		$(document).ready(function(){
+        $(document).ready(function(){
 
-			initialize();
-			$.getJSON('php/map21102013.php','',process_contatcs);
-			var array =  new Array();
-			function process_contatcs(data){
+            initialize();
+            $.getJSON('php/map21102013.php','',process_contatcs);
+            var array =  new Array();
+            function process_contatcs(data){
 
 
-				$.each(data, function(name , info){
+                $.each(data, function(name , info){
                     var lat = info.latitud;
                     var lon = info.longitud;
                     var nombre = info.nombre;
+                    var direccion = info.direccion;
+                    var telefono = info.telefono;
                     var id = nombre;
-					TestMarker(lat, lon , nombre , id);
+                    TestMarker(lat, lon , nombre , id, direccion, telefono);
 
-		      });
+              });
          }
     });
 
@@ -31,24 +33,43 @@
         map = new google.maps.Map(document.getElementById("map"), myOptions);
 
     }
-
     // Function for adding a marker to the page.
     var gmarkers = [];
-    function addMarker(location,title,id) {
+    function addMarker(location,title,id, direccion, telefono) {
         marker = new google.maps.Marker({
             position: location,
             title: title,
             id: id,
-            icon: 'images/restaurant.png',
+            icon: 'images/restaurant2.png',
             map: map
         });
         gmarkers.push(marker);
+        var infowindow = new google.maps.InfoWindow({
+        content: "<div class='panel panel-primary'>"+
+            "<div class='panel-heading'>"+title+"</div>"+
+            "<div class='panel-body'>"+
+            "<p><strong>Dirección: </strong>"+direccion+"</p>"+
+            "<p><strong>Teléfono: </strong> +56"+telefono+"</p>"+
+            "</div>"+
+            "</div>",
+        maxWidth:500,
+        maxLength:100
+    });
+
+    google.maps.event.addListener(marker, "mouseover", function() {
+    infowindow.open(map, this);
+    });
+
+    google.maps.event.addListener(marker, 'mouseout', function() {
+    infowindow.close();
+    });
+
     }
 
     // Testing the addMarker function
-    function TestMarker(lat ,longi , title ,id ) {
+    function TestMarker(lat ,longi , title ,id, direccion, telefono ) {
            marke = new google.maps.LatLng(lat, longi);
-           addMarker(marke,title,id);
+           addMarker(marke,title,id, direccion, telefono);
     }
 
     function puntos_rest(item){
@@ -72,5 +93,3 @@
             map.panTo(new google.maps.LatLng(latitud , longitud ));
 
     }
-
-
