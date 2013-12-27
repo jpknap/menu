@@ -52,8 +52,10 @@
                 var info_html = '<option> </option>';
 
                  $.each(data, function(name , info){
+                    var valoroption = info.latitud+","+info.longitud+","+info.direccion+","+info.telefono;
 
-                    info_html += "<option value="+info.latitud+","+info.longitud+","+info.direccion+","+info.telefono+">"+info.nombre+"</option>";
+                    info_html += '<option value="'+valoroption+'">'+info.nombre+"</option>";
+
 
 
                });
