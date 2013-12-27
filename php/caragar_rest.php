@@ -6,7 +6,7 @@
 
 	$ciudad=$_GET['ciudad'];
 
-	$consulta= "SELECT latitud, longitud , nombre  from restorant where ciudad='$ciudad'";
+	$consulta= "SELECT latitud, longitud , nombre, direccion, telefono  from restorant where ciudad='$ciudad'";
 
 	$query = mysql_query($consulta,$conexion) or die ("consulta fallida".mysql_error());
 	//$datos = mysql_fetch_array($query) 

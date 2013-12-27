@@ -78,7 +78,7 @@
             gmarkers[i].setMap(null);
         }
         var res = $(item).val().split(",");
-         TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text() );
+         TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text(), res[2], res[3] );
          centrarMapaRest(res[0],res[1]);
          getMenuRest(res[0], res[1]);
 
