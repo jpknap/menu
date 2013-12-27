@@ -60,7 +60,11 @@ document.onkeypress = stopRKey;
     }
     function process_contatcs(data){
                 var info_html = '<option value="0" > Mostrar Todo </option>';
-
+                if(data.length==0) {
+                    alert('No existen locales en la ciudad especificada');
+                     return;
+                }
+                else{
                  $.each(data, function(name , info){
                     var valoroption = info.latitud+","+info.longitud+","+info.direccion+","+info.telefono;
 
@@ -70,6 +74,7 @@ document.onkeypress = stopRKey;
 
                });
                 $('#rest').html(info_html);
+            }
     }
     function getMenuRest(latitud, longitud){
         $.getJSON('php/get_menu_rest.php', { latitud:latitud , longitud:longitud } ,processMenuRest);
