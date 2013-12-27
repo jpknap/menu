@@ -29,19 +29,22 @@
         var myOptions = {
             zoom: 11,
             center: myLatlng
+       
         }
         map = new google.maps.Map(document.getElementById("map"), myOptions);
+
 
     }
     // Function for adding a marker to the page.
     var gmarkers = [];
-    function addMarker(location,title,id, direccion, telefono) {
+    function addMarker(location,title,id, direccion, telefono, lat , longi) {
         marker = new google.maps.Marker({
             position: location,
             title: title,
             id: id,
             icon: 'images/restaurant2.png',
             map: map
+
         });
         gmarkers.push(marker);
         var infowindow = new google.maps.InfoWindow({
@@ -64,12 +67,18 @@
     infowindow.close();
     });
 
+     google.maps.event.addListener(marker, 'click', function(){
+         getMenuRest(lat ,longi);
+       
+
+    });
+
     }
 
     // Testing the addMarker function
     function TestMarker(lat ,longi , title ,id, direccion, telefono ) {
            marke = new google.maps.LatLng(lat, longi);
-           addMarker(marke,title,id, direccion, telefono);
+           addMarker(marke,title,id, direccion, telefono ,lat,longi);
     }
 
     function puntos_rest(item){
@@ -77,12 +86,23 @@
         for (i = 0; i<gmarkers.length; i++){
             gmarkers[i].setMap(null);
         }
-        console.log($(item).val());
+        if(res = $(item).val() != "0"){
         var res = $(item).val().split(",");
 
          TestMarker(res[0],res[1], $(item).find(":selected").text() ,$(item).find(":selected").text(), res[2], res[3] );
          centrarMapaRest(res[0],res[1]);
          getMenuRest(res[0], res[1]);
+        }
+        else{
+             $(item).find('option').each(function() {
+            if($(this).val() != 0 ){
+
+                 var res = $(this).val().split(",");
+                TestMarker(res[0],res[1], $(this).text() ,$(this).text(), res[2], res[3] );
+
+            }
+        });
+        }
 
     }
 
