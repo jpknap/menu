@@ -58,20 +58,25 @@
         maxWidth:500,
         maxLength:100
     });
+        google.maps.event.addListener(marker, 'click', function(){
+         getMenuRest(lat ,longi);
+        infowindow.open(map, this)     ;
+
+    });
 
     google.maps.event.addListener(marker, "mouseover", function() {
-    infowindow.open(map, this);
+        setTimeout(function() { infowindow.open(map, marker) }, 1000);
+
+     
+      
+       
     });
 
     google.maps.event.addListener(marker, 'mouseout', function() {
-    infowindow.close();
+       // infowindow.close();
     });
 
-     google.maps.event.addListener(marker, 'click', function(){
-         getMenuRest(lat ,longi);
-       
-
-    });
+     
 
     }
 
